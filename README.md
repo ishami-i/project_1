@@ -1,34 +1,82 @@
-# Project 1 Assignment
-This is formative assignment, which involves 4 questions solved in 4 different directories.
+# Project 1: C and Arduino Formative Assignment
+
+A formative assignment made of four problems, each solved in its own directory. Three are standard C programs and one is an Arduino sketch.
+
+## Repository structure
+
 ```
 .
 ├── README.md
-├── recursive_problem_solving
-├── sensor_monitoring_system
-├── smart_parking_system
-└── transaction_control_flow
+├── .gitignore
+├── sensor_monitoring_system/
+│   ├── README.md
+│   └── main.c
+├── transaction_control_flow/
+│   ├── README.md
+│   ├── main.c
+│   ├── main.h
+│   ├── balance.c
+│   ├── deposit.c
+│   ├── withdraw.c
+│   └── summary.c
+├── recursive_problem_solving/
+│   ├── README.md
+│   └── main.c
+└── smart_parking_system/
+    ├── README.md
+    ├── smart_parking_system.ino
+    └── smart_parking_system.png
 ```
-for each of the directory there is designed problem being solved.
 
-##  C Program Development and Compilation for a Sensor Monitoring System
+## The four problems
 
-the first problem for A water-quality monitoring device uses an Arduino-compatible C environment to process sensor readings before transmitting them to a monitoring system. The device receives a temperature reading and a turbidity reading, calculates a simple water-quality status, and displays a formatted report.
+| # | Directory | Topic | Language |
+|---|-----------|-------|----------|
+| 1 | [`sensor_monitoring_system`](sensor_monitoring_system/) | Water-quality index from temperature and turbidity readings | C |
+| 2 | [`transaction_control_flow`](transaction_control_flow/) | Menu-driven mobile-money transaction system | C (multi-file) |
+| 3 | [`recursive_problem_solving`](recursive_problem_solving/) | Delivery-distance analysis with a recursive sum | C |
+| 4 | [`smart_parking_system`](smart_parking_system/) | Ultrasonic parking-space indicator | Arduino (C++) |
 
-it's designated codes are found in the in the directory sensor_monitoring_system.
-## Transaction Processing and Control Flow
+### 1. Sensor monitoring system
+A water-quality monitoring device reads a temperature and a turbidity value, calculates a simplified quality index, classifies the water as Good, Warning or Critical, and prints a formatted report.
 
-A mobile-money service needs a simple transaction processing system for an agent. The system should allow the agent to repeatedly process different transactions while validating inputs and handling invalid operations.
+### 2. Transaction processing and control flow
+A mobile-money agent repeatedly processes deposits, withdrawals, balance checks and summaries from a menu, with input validation and handling of invalid operations.
 
-The code designated codes are found in the directory transaction_control_flow
+### 3. Functions and recursive problem solving
+A logistics company analyses the distances of N delivery routes: total, average, longest route, routes above a limit, and a recursive sum of the distances.
 
-## Functions & Recursive Problem Solving
+### 4. Arduino-based smart parking system
+A shopping-centre parking indicator detects whether a space is occupied and shows the result with LEDs and a buzzer. The directory includes the circuit drawing.
 
-A logistics company wants to analyze the delivery distances recorded for a group of delivery routes. The system stores the distances in an integer array and needs to identify useful information about the routes.
+## Requirements
 
-it's designated codes are in recursive_problem_solving
+- **Problems 1 to 3:** a C compiler such as `gcc` or `clang` (C99 or later).
+- **Problem 4:** the Arduino IDE (or `arduino-cli`) and the hardware listed in that directory's README, or a simulator such as Tinkercad.
 
-## Arduino-Based Smart Parking System
+## Building and running
 
-A shopping center wants to develop a small-scale smart parking indicator that can detect whether a parking space is occupied and provide a visual indication to drivers.
+Each C directory is built on its own. From the repository root:
 
-it's designated codes and about drawing are in smart_parking_system
+```bash
+# 1. Sensor monitoring system
+gcc -Wall -Wextra -o sensor_monitoring_system/main sensor_monitoring_system/main.c
+./sensor_monitoring_system/main
+
+# 2. Transaction control flow
+cd transaction_control_flow
+gcc -Wall -Wextra -o momo main.c balance.c deposit.c withdraw.c summary.c
+./momo
+cd ..
+
+# 3. Recursive problem solving
+gcc -Wall -Wextra -o recursive_problem_solving/main recursive_problem_solving/main.c
+./recursive_problem_solving/main
+```
+
+For problem 4, open `smart_parking_system/smart_parking_system.ino` in the Arduino IDE, select your board and port, and upload.
+
+## Notes
+
+- Compiled binaries (`main`, `momo`) are build output and don't need to be committed.
+- Open each directory's own README for details on design, sample runs and usage.
