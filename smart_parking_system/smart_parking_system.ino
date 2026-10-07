@@ -1,4 +1,4 @@
-// Smart Parking System - final version
+// Smart Parking System
 
 const int buttonPin = 6;
 const int pingPin   = 7;
@@ -80,7 +80,6 @@ void loop() {
   Serial.print(" m | Spot: ");
   Serial.println(spotTaken ? "TAKEN" : "FREE");
 
-  // Wait 100 ms but keep checking the button so quick presses aren't missed
   for (int i = 0; i < 20; i++) {
     checkButton();
     delay(5);
