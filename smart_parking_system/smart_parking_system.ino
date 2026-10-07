@@ -57,29 +57,39 @@ void loop() {
 
   checkButton();
   bool carNear = (meters < thresholdMeters);
+  
+  // Track buzzer state for the Serial Monitor printout
+  bool buzzerActive = false;
 
   if (carNear && spotTaken) {
     // Car arrives, spot taken: red + buzzer ON
     digitalWrite(redLed, HIGH);
     digitalWrite(greenLed, LOW);
     tone(buzzer, 1000);
+    buzzerActive = true;     // Record that the buzzer is sounding
   } else if (carNear && !spotTaken) {
     // Car arrives, spot free: green + buzzer OFF
     digitalWrite(redLed, LOW);
     digitalWrite(greenLed, HIGH);
     noTone(buzzer);
+    buzzerActive = false;    // Record that the buzzer is silent
   } else {
     // No car: everything off
     digitalWrite(redLed, LOW);
     digitalWrite(greenLed, LOW);
     noTone(buzzer);
+    buzzerActive = false;    // Record that the buzzer is silent
   }
 
+  // Original Serial print with the added Buzzer status column
   Serial.print("Distance: ");
   Serial.print(meters, 2);
   Serial.print(" m | Spot: ");
-  Serial.println(spotTaken ? "TAKEN" : "FREE");
+  Serial.print(spotTaken ? "TAKEN" : "FREE");
+  Serial.print(" | Buzzer: ");
+  Serial.println(buzzerActive ? "ON" : "OFF");
 
+  // Wait 100 ms but keep checking the button so quick presses aren't missed
   for (int i = 0; i < 20; i++) {
     checkButton();
     delay(5);
